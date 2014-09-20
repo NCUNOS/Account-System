@@ -1,0 +1,55 @@
+h2.page-header
+  | 申請帳號
+ul.nav.nav-pills.nav-justified.thumbnail.as-step
+  li
+    a href='#' onClick='return false;'
+      h4.list-group-item-heading
+        | Step 1
+      p.list-group-item-text
+        | 登入 Portal 帳號
+  li
+    a href='#' onClick='return false;'
+      h4.list-group-item-heading
+        | Step 2
+      p.list-group-item-text
+        | 填寫個人資料
+  li.active
+    a href='#' onClick='return false;'
+      h4.list-group-item-heading
+        | Step 3
+      p.list-group-item-text
+        | 確認開通帳號
+
+div.alert.alert-info
+  | 確認碼已由 <code>ncunos@gmail.com</code> 送出，請至您的信箱 <code>#{@email}</code> 查看並輸入。
+
+script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.1/js/bootstrapValidator.min.js'
+form.form-horizontal role='form' method='post' action==url('/apply/step_3_do')
+  div.form-group
+    label.control-label.col-sm-2 for='active_code'
+      | 確認碼
+    div.col-sm-10
+      input#active_code.form-control type='text' name='active_code' required='true'
+  div.form-group
+    div.col-sm-offset-2.col-sm-10
+      button.btn.btn-success type='submit'
+        | 確認送出
+
+javascript:
+  $('form').bootstrapValidator({
+    feedbackIcons: {
+      valid: 'glyphicon glyphicon-ok',
+      invalid: 'glyphicon glyphicon-remove',
+      validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+      active_code: {
+        message: '請輸入確認碼',
+        validators: {
+          notEmpty: {
+            message: '請輸入確認碼'
+          }
+        }
+      }
+    }
+  });

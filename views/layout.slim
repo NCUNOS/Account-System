@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+    script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+    script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
+    link rel="stylesheet" href==url('/assets/bootstrap.theme.css')
+    title
+      | NOS Account System | 中央大學網路開源社帳號系統
+  body
+    nav.navbar.navbar-static-top.as-nav
+      div.container
+        div.navbar-header
+          a.navbar-brand href==url('/')
+            | NOS Account System
+        ul.nav.navbar-nav.navbar-right
+          li
+            a href==url('/admin')
+              | Admin
+
+    div.as-header
+      div.container
+        h1
+          | 中央大學網路開源社帳號系統
+
+    div.container
+      == yield
+
+    footer.as-footer
+      div.container
+        p
+          | Community of Networking and Open Source &copy; 2014-

@@ -1,0 +1,137 @@
+h2.page-header
+  | 申請帳號
+ul.nav.nav-pills.nav-justified.thumbnail.as-step
+  li
+    a href='#' onClick='return false;'
+      h4.list-group-item-heading
+        | Step 1
+      p.list-group-item-text
+        | 登入 Portal 帳號
+  li.active
+    a href='#' onClick='return false;'
+      h4.list-group-item-heading
+        | Step 2
+      p.list-group-item-text
+        | 填寫個人資料
+  li.disabled
+    a href='#' onClick='return false;'
+      h4.list-group-item-heading
+        | Step 3
+      p.list-group-item-text
+        | 確認開通帳號
+
+script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.1/js/bootstrapValidator.min.js'
+form.form-horizontal role='form' method='post' action==url('/apply/step_2_do')
+  div.form-group
+    label.control-label.col-sm-2
+      | 學號
+    div.col-sm-10
+      p.form-control-static
+        = @uid
+  div.form-group
+    label.control-label.col-sm-2 for='chinese_name'
+      | 中文姓名
+    div.col-sm-10
+      input#chinese_name.form-control type='text' name='chinese_name' required='true'
+  div.form-group
+    label.control-label.col-sm-2 for='english_name'
+      | 英文姓名
+    div.col-sm-10
+      input#english_name.form-control type='text' name='english_name' required='true'
+      div#english_name_error
+      span.help-block
+        p.text-muted
+          | 格式: 名-名 姓 <code>Ex. 王曉明 Xiao-Ming Wang</code>
+          br
+          a href='http://140.111.34.69/' target='_blank'
+            | 英文姓名查詢: http://140.111.34.69/
+  div.form-group
+    label.control-label.col-sm-2 for='password'
+      | 密碼（請輸入兩次）
+    div.col-sm-5
+      input#password.form-control type='password' name='password' required='true'
+    div.col-sm-5
+      input#password_twice.form-control type='password' name='password_twice' required='true'
+  div.form-group
+    label.control-label.col-sm-2
+      | 電子信箱
+    div.col-sm-10
+      input.form-control type='email' value==@email disabled='disabled'
+  div.form-group
+    div.col-sm-offset-2.col-sm-10
+      div.checkbox
+        label
+          input#agreement type='checkbox' name='agreement' required='true'
+          | 我同意個資法同意書之內容
+  div.form-group
+    div.col-sm-offset-2.col-sm-10
+      button.btn.btn-success type='submit'
+        | 確認送出
+
+javascript:
+  $('form').bootstrapValidator({
+    feedbackIcons: {
+      valid: 'glyphicon glyphicon-ok',
+      invalid: 'glyphicon glyphicon-remove',
+      validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+      chinese_name: {
+        message: '請輸入姓名',
+        validators: {
+          notEmpty: {
+            message: '請輸入姓名'
+          },
+          stringLength: {
+            min: 2,
+            message: '請輸入完整姓名'
+          }
+        }
+      },
+      english_name: {
+        message: '請輸入英文姓名',
+        container: '#english_name_error',
+        validators: {
+          notEmpty: {
+            message: '請輸入英文姓名'
+          },
+          regexp: {
+            regexp: /^[\w-]+\s+[\w-]+$/,
+            message: '請輸入完整的英文姓名'
+          }
+        }
+      },
+      password: {
+        message: '請輸入密碼',
+        validators: {
+          notEmpty: {
+            message: '請輸入密碼'
+          },
+          stringLength: {
+            min: 8,
+            message: '密碼至少輸入 8 個字'
+          }
+        }
+      },
+      password_twice: {
+        message: '請再次輸入密碼',
+        validators: {
+          notEmpty: {
+            message: '請再次輸入密碼'
+          },
+          identical: {
+            field: 'password',
+            message: '請確認兩次輸入相同'
+          }
+        }
+      },
+      agreement: {
+        message: '請同意個資法同意書之內容',
+        validators: {
+          notEmpty: {
+            message: '請同意個資法同意書之內容'
+          }
+        }
+      }
+    }
+  });

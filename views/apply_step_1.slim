@@ -1,0 +1,31 @@
+h2.page-header
+  | 申請帳號
+ul.nav.nav-pills.nav-justified.thumbnail.as-step
+  li.active
+    a href='#' onClick='return false;'
+      h4.list-group-item-heading
+        | Step 1
+      p.list-group-item-text
+        | 登入 Portal 帳號
+  li.disabled onClick='return false;'
+    a href='#'
+      h4.list-group-item-heading
+        | Step 2
+      p.list-group-item-text
+        | 填寫個人資料
+  li.disabled onClick='return false;'
+    a href='#'
+      h4.list-group-item-heading
+        | Step 3
+      p.list-group-item-text
+        | 確認開通帳號
+
+div.well.as-portal
+  //div.alert.alert-info
+  //  | 您必須先登入 Portal 帳號以便驗證身份
+
+  a.btn.as-btn-portal.btn-lg.btn-block href==url('/apply/step_1_portal')
+    span.glyphicon.glyphicon-log-in
+    | &nbsp; 
+    | Portal 登入
+
