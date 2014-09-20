@@ -48,7 +48,7 @@ get '/apply/step_2' do
 	user = session[:portal_user] || session[:portal_user_past]
 	redirect to '/apply' if user.nil?
 	# Check if registered
-	@uid = 'ldap_test' || user.info[:student_id]
+	@uid = user.info[:student_id]
 	ldap = Net::LDAP.new host: Config::LDAP::HOST, base: Config::LDAP::BASE_DC
 	ldap_search = ldap.search filter: Net::LDAP::Filter.eq("cn", @uid)
 	has_registered = ldap_search.length > 0
